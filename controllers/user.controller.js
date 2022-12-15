@@ -172,6 +172,25 @@ class UserController {
       message: `Your new username is ${newUsername}`
     });
   }
+
+  async updateMobileNumber(req, res) {
+    const user = await userService.findByEmail(req.body);
+    const newNumber = req.body.mobileNumber;
+    if (_.isEmpty(user)) {
+      return res.status(200).send({
+        success: true,
+        message: 'user does not exist'
+      });
+    }
+    if (user) {
+      await user.updateOne({ mobileNumber: newNumber });
+    }
+
+    return res.status(200).send({
+      success: true,
+      message: `You updated your mobile number to ${newNumber}`
+    });
+  }
 }
 
 export default new UserController();
