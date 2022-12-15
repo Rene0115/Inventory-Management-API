@@ -19,7 +19,8 @@ class UserController {
     const data = {
       email: req.body.email,
       password: bcrypt.hashSync(req.body.password, 10),
-      username: req.body.username
+      username: req.body.username,
+      mobileNumber: req.body.mobileNumber
     };
     const newUser = await userService.create(data);
 
@@ -150,6 +151,25 @@ class UserController {
 
     return res.status(201).send({
       message: `Password changed successfully. Confirmation email sent to  ${user.email}`
+    });
+  }
+
+  async updateUsername(req, res) {
+    const user = await userService.findByEmail(req.body);
+    const newUsername = req.body.username;
+    if (_.isEmpty(user)) {
+      return res.status(200).send({
+        success: true,
+        message: 'user does not exist'
+      });
+    }
+    if (user) {
+      await user.updateOne({ username: newUsername });
+    }
+
+    return res.status(200).send({
+      success: true,
+      message: `Your new username is ${newUsername}`
     });
   }
 }

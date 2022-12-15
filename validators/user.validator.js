@@ -9,7 +9,8 @@ export const validateUserSignupSchema = Joi.object().keys({
     .lowercase()
     .required(),
   username: Joi.string().required().max(15),
-  password: Joi.string().required()
+  password: Joi.string().required(),
+  mobileNumber: Joi.number().required()
 });
 
 export const validateUserLoginSchema = Joi.object().keys({

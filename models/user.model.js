@@ -18,6 +18,10 @@ const user = new mongoose.Schema({
     type: 'String',
     required: true
   },
+  mobileNumber: {
+    type: 'Number',
+    required: true
+  },
   verified: {
     type: Boolean,
     default: false
@@ -31,8 +35,7 @@ user.methods.toJSON = function l() {
   return userObject;
 };
 
-// Define static method to be used on User object
-user.methods.generateToken = function t() { // t is short for token
+user.methods.generateToken = function t() {
   const token = jwt.sign({
     _id: this._id,
     email: this.email
