@@ -67,12 +67,26 @@ class ProductController {
     if (!product) {
       return res.status(404).send({
         success: false,
-        message: 'Movie not deleted.'
+        message: 'Product not deleted.'
       });
     }
     return res.status(200).send({
       success: true,
-      message: 'Movie deleted successfully.'
+      message: 'Product deleted successfully.'
+    });
+  }
+
+  async deleteProductByCategory(req, res) {
+    const product = await productService.deleteProductByCategory(req.body.category);
+    if (!product) {
+      return res.status(404).send({
+        success: false,
+        message: 'Something went wrong.'
+      });
+    }
+    return res.status(200).send({
+      success: true,
+      message: 'Product deleted successfully.'
     });
   }
 }

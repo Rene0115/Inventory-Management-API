@@ -21,5 +21,10 @@ class ProductService {
     const product = await productModel.find({ category: data });
     return product;
   }
+
+  async deleteByCategory(data) {
+    const product = await productModel.deleteMany({ category: data });
+    return product;
+  }
 }
 export default new ProductService();
