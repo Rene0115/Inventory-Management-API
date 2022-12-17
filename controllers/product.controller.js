@@ -47,5 +47,19 @@ class ProductController {
       message: `The new price is for your ${product.name} is ${newPrice}`
     });
   }
+
+  async deleteProduct(req, res) {
+    const product = await productService.findAndDeleteById(req.body.id);
+    if (!product) {
+      return res.status(404).send({
+        success: false,
+        message: 'Movie not deleted.'
+      });
+    }
+    return res.status(200).send({
+      success: true,
+      message: 'Movie deleted successfully.'
+    });
+  }
 }
 export default new ProductController();

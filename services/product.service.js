@@ -11,5 +11,10 @@ class ProductService {
     const product = await productModel.findOne({ _id: id });
     return product;
   }
+
+  async findAndDeleteById(id) {
+    const product = await productModel.findByIdAndDelete(id);
+    return product;
+  }
 }
 export default new ProductService();
