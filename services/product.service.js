@@ -16,5 +16,10 @@ class ProductService {
     const product = await productModel.findByIdAndDelete(id);
     return product;
   }
+
+  async getProductByCategory(data) {
+    const product = await productModel.find({ category: data });
+    return product;
+  }
 }
 export default new ProductService();

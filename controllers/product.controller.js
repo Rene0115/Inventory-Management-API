@@ -48,6 +48,20 @@ class ProductController {
     });
   }
 
+  async getByCategory(req, res) {
+    const product = await productService.getProductByCategory(req.body.category);
+    if (_.isEmpty(product)) {
+      return res.status(404).send({
+        success: false,
+        message: 'Products with this category do not exist.'
+      });
+    }
+    return res.status(200).send({
+      success: true,
+      data: product
+    });
+  }
+
   async deleteProduct(req, res) {
     const product = await productService.findAndDeleteById(req.body.id);
     if (!product) {
