@@ -28,5 +28,24 @@ class ProductController {
       data: post
     });
   }
+
+  async updatePrice(req, res) {
+    const product = await productService.findById(req.body.Id);
+    const newPrice = req.body.price;
+    if (_.isEmpty(product)) {
+      return res.status(200).send({
+        success: true,
+        message: 'product does not exist'
+      });
+    }
+    if (product) {
+      await product.updateOne({ price: newPrice });
+    }
+
+    return res.status(200).send({
+      success: true,
+      message: `The new price is for your ${product.name} is ${newPrice}`
+    });
+  }
 }
 export default new ProductController();
