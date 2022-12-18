@@ -16,8 +16,7 @@ class ProductController {
         message: 'must provide a name, price and category.'
       });
     }
-    const post = productService.create(data);
-    console.log(post);
+    const post = await productService.create(data);
     if (!post) {
       return res.status(404).send({
         success: false,
