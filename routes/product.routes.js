@@ -11,3 +11,5 @@ productRouter.post('/updateprice', [authentication, validator(priceValidator)], 
 productRouter.get('/getbycategory', productController.getByCategory);
 productRouter.delete('/deletebycategory', productController.deleteProductByCategory);
 productRouter.delete('/delete', productController.deleteProduct);
+
+export default productRouter;
