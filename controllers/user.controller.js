@@ -1,3 +1,4 @@
+/* eslint-disable import/no-cycle */
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable import/extensions */
 /* eslint-disable class-methods-use-this */
@@ -25,8 +26,7 @@ class UserController {
     const newUser = await userService.create(data);
 
     const verificationToken = newUser.generateToken();
-    const url = `${process.env.APP_URL}users/verify/${verificationToken}`;
-
+    const url = `${process.env.APP_URL}/users/verify/${verificationToken}`;
     const response = {
       body: {
         name: `${req.body.username}`,
@@ -46,7 +46,7 @@ class UserController {
     const mail = mailGenerator.generate(response);
 
     const message = {
-      from: 'Across the Globe <enere0115@gmail.com>',
+      from: 'Inventory Manager <enere0115@gmail.com>',
       to: req.body.email,
       subject: 'Verify Your Email',
       html: mail
