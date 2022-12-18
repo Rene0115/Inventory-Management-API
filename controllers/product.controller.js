@@ -34,8 +34,8 @@ class ProductController {
     const product = await productService.findById(req.body.Id);
     const newPrice = req.body.price;
     if (_.isEmpty(product)) {
-      return res.status(200).send({
-        success: true,
+      return res.status(404).send({
+        success: false,
         message: 'product does not exist'
       });
     }

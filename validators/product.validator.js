@@ -7,6 +7,7 @@ export const productValidator = Joi.object().keys({
 });
 
 export const priceValidator = Joi.object().keys({
+  Id: Joi.string().required(),
   price: Joi.number().required()
 });
 
