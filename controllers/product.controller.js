@@ -17,6 +17,7 @@ class ProductController {
       });
     }
     const post = productService.create(data);
+    console.log(post);
     if (!post) {
       return res.status(404).send({
         success: false,
