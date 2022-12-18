@@ -1,5 +1,6 @@
+/* eslint-disable import/extensions */
 /* eslint-disable class-methods-use-this */
-import productModel from '../models/product.model';
+import productModel from '../models/product.model.js';
 
 class ProductService {
   async create(data) {

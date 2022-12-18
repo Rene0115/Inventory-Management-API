@@ -1,6 +1,7 @@
+/* eslint-disable import/extensions */
 /* eslint-disable class-methods-use-this */
 import _ from 'lodash';
-import productService from '../services/product.service';
+import productService from '../services/product.service.js';
 
 class ProductController {
   async create(req, res) {
