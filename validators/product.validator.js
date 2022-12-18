@@ -11,4 +11,8 @@ export const priceValidator = Joi.object().keys({
   price: Joi.number().required()
 });
 
+export const categoryValidator = Joi.object().keys({
+  category: Joi.string().required()
+});
+
 export default { productValidator, priceValidator };

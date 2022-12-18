@@ -50,8 +50,8 @@ class ProductController {
   }
 
   async getByCategory(req, res) {
-    const product = await productService.getProductByCategory(req.body.category);
-    if (_.isEmpty(product)) {
+    const products = await productService.getProductByCategory(req.body.category);
+    if (_.isEmpty(products)) {
       return res.status(404).send({
         success: false,
         message: 'Products with this category do not exist.'
@@ -59,7 +59,7 @@ class ProductController {
     }
     return res.status(200).send({
       success: true,
-      data: product
+      data: products
     });
   }
 
@@ -78,7 +78,7 @@ class ProductController {
   }
 
   async deleteProductByCategory(req, res) {
-    const product = await productService.deleteProductByCategory(req.body.category);
+    const product = await productService.deleteByCategory(req.body.category);
     if (!product) {
       return res.status(404).send({
         success: false,
