@@ -49,6 +49,15 @@ class ProductController {
     });
   }
 
+  async getCategories(req, res) {
+    const products = await productService.getProducts();
+    const categories = Array.from(new Set(products.map((p) => p.category)));
+    return res.status(200).send({
+      success: true,
+      data: categories
+    });
+  }
+
   async getByCategory(req, res) {
     const products = await productService.getProductByCategory(req.body.category);
     if (_.isEmpty(products)) {

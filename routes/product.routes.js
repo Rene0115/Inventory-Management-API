@@ -10,6 +10,7 @@ const productRouter = express.Router();
 
 productRouter.post('/newproduct', [authentication, validator(productValidator)], productController.create);
 productRouter.post('/updateprice', [authentication, validator(priceValidator)], productController.updatePrice);
+productRouter.get('/getcategories', productController.getCategories);
 productRouter.get('/getbycategory', [authentication, validator(categoryValidator)], productController.getByCategory);
 productRouter.delete('/deletebycategory', [authentication, validator(categoryValidator)], productController.deleteProductByCategory);
 productRouter.delete('/delete', productController.deleteProduct);

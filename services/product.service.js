@@ -23,6 +23,11 @@ class ProductService {
     return product;
   }
 
+  async getProducts() {
+    const products = await productModel.find({});
+    return products;
+  }
+
   async deleteByCategory(data) {
     const product = await productModel.deleteMany({ category: data });
     return product;
