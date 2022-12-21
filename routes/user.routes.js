@@ -11,4 +11,5 @@ userRouter.post('/signup', [validator(validateUserSignupSchema)], userController
 userRouter.post('/login', [validator(validateUserLoginSchema)], userController.loginUser);
 userRouter.get('/verify/:token', userController.verify);
 userRouter.post('/forgotpassword', userController.forgotPassword);
+userRouter.post('/changepassword', userController.changePassword);
 export default userRouter;

@@ -4,7 +4,9 @@ import express from 'express';
 import productController from '../controllers/product.controller.js';
 import authentication from '../middlewares/auth.middlewares.js';
 import validator from '../validators/validator.js';
-import { productValidator, priceValidator, categoryValidator } from '../validators/product.validator.js';
+import {
+  productValidator, priceValidator, categoryValidator, getByCategoryValidator
+} from '../validators/product.validator.js';
 
 const productRouter = express.Router();
 
@@ -12,7 +14,7 @@ productRouter.post('/newproduct', [authentication, validator(productValidator)],
 productRouter.post('/updateprice', [authentication, validator(priceValidator)], productController.updatePrice);
 productRouter.get('/getcategories', productController.getCategories);
 productRouter.post('/updatecategory', [authentication, validator(categoryValidator)], productController.updateCategory);
-productRouter.get('/getbycategory', [authentication, validator(categoryValidator)], productController.getByCategory);
+productRouter.get('/getbycategory', [authentication, validator(getByCategoryValidator)], productController.getByCategory);
 productRouter.delete('/deletebycategory', [authentication, validator(categoryValidator)], productController.deleteProductByCategory);
 productRouter.delete('/delete', productController.deleteProduct);
 

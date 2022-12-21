@@ -16,4 +16,8 @@ export const categoryValidator = Joi.object().keys({
   category: Joi.string().required()
 });
 
-export default { productValidator, priceValidator };
+export const getByCategoryValidator = Joi.object().keys({
+  category: Joi.string().required()
+});
+
+export default { productValidator, priceValidator, getByCategoryValidator };
