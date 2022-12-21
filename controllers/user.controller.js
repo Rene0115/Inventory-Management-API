@@ -123,6 +123,12 @@ class UserController {
         message: 'user does not exist'
       });
     }
+    if (user.verified !== true) {
+      return res.status(404).send({
+        success: false,
+        message: 'verify email before continuing'
+      });
+    }
     if (user) {
       const hash = bcrypt.hashSync(newPassword, 10);
 
