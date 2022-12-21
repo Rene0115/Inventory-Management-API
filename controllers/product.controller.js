@@ -49,6 +49,25 @@ class ProductController {
     });
   }
 
+  async updateCategory(req, res) {
+    const product = await productService.findById(req.body.Id);
+    const newCategory = req.body.category;
+    if (_.isEmpty(product)) {
+      return res.status(404).send({
+        success: false,
+        message: 'product does not exist'
+      });
+    }
+    if (product) {
+      await product.updateOne({ category: newCategory });
+    }
+
+    return res.status(200).send({
+      success: true,
+      message: `The new category is for your ${product.name} is ${newCategory}`
+    });
+  }
+
   async getCategories(req, res) {
     const products = await productService.getProducts();
     const categories = Array.from(new Set(products.map((p) => p.category)));

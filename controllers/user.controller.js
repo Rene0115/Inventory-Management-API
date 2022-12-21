@@ -191,6 +191,32 @@ class UserController {
       message: `You updated your mobile number to ${newNumber}`
     });
   }
+
+  async changePassword(req, res) {
+    const user = await userService.findByEmail(req.body);
+    if (_.isEmpty(user)) {
+      return res.status(404).send({
+        success: false,
+        message: 'User does not exist'
+      });
+    }
+    const newPassword = req.body.password;
+    // check if old password and new password are the same.
+    const checkPassword = bcrypt.compareSync(newPassword, user.password);
+    if (!checkPassword) {
+      return res.status(404).send({
+        success: false,
+        message: 'Old password and new password must be different.'
+      });
+    }
+    const hash = bcrypt.hashSync(newPassword, 10);
+
+    await user.updateOne({ password: hash });
+    return res.status(200).send({
+      success: true,
+      message: 'Password changed successfully.'
+    });
+  }
 }
 
 export default new UserController();
