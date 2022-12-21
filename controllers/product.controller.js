@@ -68,6 +68,25 @@ class ProductController {
     });
   }
 
+  async updateName(req, res) {
+    const product = await productService.findById(req.body.Id);
+    const newName = req.body.name;
+    if (_.isEmpty(product)) {
+      return res.status(404).send({
+        success: false,
+        message: 'product does not exist'
+      });
+    }
+    if (product) {
+      await product.updateOne({ name: newName });
+    }
+
+    return res.status(200).send({
+      success: true,
+      message: `Your products name was changed from ${product.name} to ${newName}`
+    });
+  }
+
   async getCategories(req, res) {
     const products = await productService.getProducts();
     const categories = Array.from(new Set(products.map((p) => p.category)));
@@ -92,7 +111,7 @@ class ProductController {
   }
 
   async deleteProduct(req, res) {
-    const product = await productService.findAndDeleteById(req.body.id);
+    const product = await productService.findAndDeleteById(req.body.Id);
     if (!product) {
       return res.status(404).send({
         success: false,
